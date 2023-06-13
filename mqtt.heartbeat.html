@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MQTT Javascript</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+  <!-- Custom Styles theme -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Connection panel -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span id="connectionStatus">Connection - Disconnected.</span>
+          </div>
+          <div class="panel-body" id="serverCollapse">
+            <div class="col-lg-1">
+              <div class="col-lg-1">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><label for="frecuencia-cardiaca">Frecuencia Cardiaca</label></td>
+                      <td>
+                        <button id="heartRateButton" type="button" class="btn btn-primary" onclick="publishHeartRate();">Enviar Frecuencia Cardiaca</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of Connection panel -->
+  </div>
+
+  <!-- Source Paho MQTT Client-->
+  <script src="paho-mqtt.js"></script>
+
+  <!-- Utility AJavascript -->
+  <script src="utility.js"></script>
+
+  <!-- Javascript used for Bootstrap Theme -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+  <script>
+    // Función para enviar la frecuencia cardíaca simulada al hacer clic en el botón
+    function publishHeartRate() {
+      var heartRate = Math.floor(Math.random() * (100 - 60 + 1)) + 60; // Generar frecuencia cardíaca simulada entre 60 y 100
+      var message = heartRate.toString();
+      publish("frecuencia-cardiaca", 0, message, false);
+    }
+  </script>
+</body>
+</html>
